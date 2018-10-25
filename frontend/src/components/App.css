@@ -1,0 +1,12 @@
+#header-padding {
+  padding-top: 5px;
+}
+
+#nav-readable {
+  color: lightblue;
+  text-shadow: 2px 2px 4px salmon;
+}
+
+.oi {
+  padding-right: 8px;
+}
