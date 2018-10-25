@@ -1,1 +1,2 @@
 export const CATEGORY_REQUEST = 'CATEGORY_REQUEST'
+export const THROW_ERROR = 'THROW_ERROR'
