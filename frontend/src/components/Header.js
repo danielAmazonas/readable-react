@@ -1,6 +1,5 @@
 import React from 'react'
 import Categories from './Categories'
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 const Header = ({ title, subtitle, icon }) => {
   return (
@@ -23,16 +22,13 @@ const Header = ({ title, subtitle, icon }) => {
           className='navbar-toggler'
           type='button'
           data-toggle='collapse'
-          data-target='#navbarSupportedContent'>
+          data-target='#navbarSupportedContent'
+          aria-controls='navbarSupportedContent'
+          aria-expanded='false'
+          aria-label='Toggle navigation'>
           <span className='navbar-toggler-icon'></span>
         </button>
-        <Router>
-          <div>
-            <Switch>
-              <Route exact path='/' component={Categories} />
-            </Switch>
-          </div>
-        </Router>
+        <Categories />
       </nav>
     </div>
   )

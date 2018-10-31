@@ -17,3 +17,13 @@ export const getCategories = () =>
   fetch(`${api}/categories`, { headers })
     .then(res => res.json())
     .then(data => data.categories)
+
+/**
+ * @description Pegar todos os Posts
+ */
+export const getPosts = () =>
+  fetch(`${api}/posts`, { method: 'GET', headers })
+    .then(res => res.json())
+    .then(data => {
+      return data
+    })

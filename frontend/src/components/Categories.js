@@ -34,9 +34,7 @@ class Categories extends Component {
                   to={`/${m.name}`}
                   key={this.getKey()}
                   className='nav-link'
-                  id='navbarDropdown'
-                  role='button'
-                  data-toggle='dropdown'>
+                  role='button'>
                   <span className='oi oi-link-intact'></span>
                   {m.name}
                 </Link>

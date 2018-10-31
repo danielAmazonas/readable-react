@@ -1,2 +1,3 @@
 export const CATEGORY_REQUEST = 'CATEGORY_REQUEST'
+export const ALL_POSTS = 'ALL_POSTS'
 export const THROW_ERROR = 'THROW_ERROR'

@@ -1,31 +1,21 @@
 import React, { Component } from 'react'
-import logo from '../logo.svg'
 import './App.css'
-import Header from './Header'
-import Footer from './Footer'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import Main from '../components/Main'
+import Posts from './Posts'
 
 class App extends Component {
   render() {
     return (
-      <div
-        className='container'>
-        <header>
-          <div
-            className='row'>
-            <Header
-              title='readable'
-              subtitle='react nanodegree'
-              icon='oi oi-eye' />
+      <div className='container'>
+        <Router>
+          <div>
+            <Switch>
+              <Route exact path='/' component={Main} />
+              <Route path='/:category' component={Posts} />
+            </Switch>
           </div>
-        </header>
-        <footer>
-          <div className='row'>
-            <Footer
-              name='Daniel Souza Amazonas'
-              year='2018'
-              notice='all rights reserved' />
-          </div>
-        </footer>
+        </Router>
       </div>
     )
   }
