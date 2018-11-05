@@ -17,6 +17,7 @@ const Main = () => {
       <div className='row'>
         <Posts local='main' />
       </div>
+      <br /><br /><br /><br />
       <div className='row'>
         <Footer
           name='daniel souza amazonas'

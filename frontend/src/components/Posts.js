@@ -46,27 +46,55 @@ class Posts extends Component {
             Back Main
            </Link>
         </If>
-        <div className='col-md-12'>
-          <p className='text-capitalize'>
-            {category === 'react' ?
-              'react posts' : (category === 'redux' ?
-                'redux posts' : (category === 'udacity') ?
-                  'udacity posts' : 'all posts')}
-          </p>
+        <div className='row'>
+          <div className='col'>
+            <h5 className='text-capitalize post-category'>
+              <span className='oi oi-bookmark'></span>
+              {category === 'react' ?
+                'react posts' : (category === 'redux' ?
+                  'redux posts' : (category === 'udacity') ?
+                    'udacity posts' : 'all posts')}
+            </h5>
+          </div>
+          <div className='col'>
+            <button
+              type='button'
+              className='btn btn-primary float-right text-capitalize btn-outline-dark btn-sm'>
+              <span className='oi oi-plus'></span>
+              add post
+            </button>
+          </div>
         </div>
         {posts.map(m => {
           return (
             <div className='card' key={this.getKey()}>
               <div className='card-body'>
                 <h5 className='card-title text-capitalize'>
-                  <span>{m.author}</span>
-                  <span> - </span>
-                  <span>{m.timestamp = new Date(m.timestamp).toLocaleDateString('en-US', optionsDate)}</span>
+                  <span className='author'>{m.author}</span>
+                  <span> </span>
+                  <span className='date'>{m.timestamp = new Date(m.timestamp).toLocaleDateString('en-US', optionsDate)}</span>
+                  <span className='text-capitalize float-right score'>score:
+                    <span>  </span>
+                    {m.voteScore}
+                    <span>  </span>
+                    <a href='#' className='down'>
+                      <span className='oi oi-thumb-down'></span>
+                    </a>
+                    <a href='#' className='up'>
+                      <span className='oi oi-thumb-up'></span>
+                    </a>
+                  </span>
                   <br />
-                  <span>{m.title}</span>
+                  <span className='title'>
+                    {m.title}
+                  </span>
                 </h5>
                 <h6 className='card-subtitle mb-2 text-muted text-capitalize'>{m.category}</h6>
-                <p className='card-text'>{m.body}</p>
+                <p className='card-text'>
+                  <span className='oi oi-double-quote-serif-left'></span>
+                  {m.body}
+                  <span className='oi oi-double-quote-serif-right'></span>
+                </p>
                 <a href='#' className='card-link'>
                   <span className='oi oi-comment-square'></span>
                   Comments {m.commentCount}</a>
