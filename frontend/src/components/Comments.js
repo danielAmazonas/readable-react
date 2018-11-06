@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getPosts } from '../actions'
-import If from '../utils/If'
-import PropTypes from 'prop-types'
+import { getComments } from '../actions'
 import { Link } from 'react-router-dom'
+import If from '../utils/If'
 
-class Posts extends Component {
+class Comments extends Component {
   constructor(props) {
     super(props)
     this.keyCount = 0
@@ -16,18 +15,20 @@ class Posts extends Component {
     return this.keyCount++
   }
 
-  static propTypes = {
-    local: PropTypes.string
-  }
-
   componentDidMount() {
-    this.props.list()
+    this.props.list(this.props.match.params.id)
   }
 
   render() {
-    const { local, posts, category } = this.props
+    const { local, comments } = this.props
 
-    console.log('>>> ', posts)
+    console.log('>>>', comments)
+
+    let category = this.props.match.params.category
+
+    let title = this.props.match.params.title
+
+    console.log('>>>', title)
 
     const optionsDate = {
       weekday: 'long',
@@ -50,22 +51,37 @@ class Posts extends Component {
           <div className='col'>
             <h5 className='text-capitalize post-category'>
               <span className='oi oi-bookmark'></span>
-              {category === 'react' ?
-                'react posts' : (category === 'redux' ?
-                  'redux posts' : (category === 'udacity') ?
-                    'udacity posts' : 'all posts')}
+              comments - {title} <span className='category-comments'>{category}</span>
             </h5>
           </div>
-          <div className='col'>
-            <button
-              type='button'
-              className='btn btn-primary float-right text-capitalize btn-outline-dark btn-sm'>
-              <span className='oi oi-plus'></span>
-              add post
-            </button>
+        </div>
+        <div className='card'>
+          <div className='card-body'>
+            <form>
+              <div className='col-md-4 form-group'>
+                <label for='author' className='text-capitalize'>author:</label>
+                <input
+                  id='author'
+                  type='text'
+                  className='form-control'
+                  placeholder='Enter your name'
+                  required
+                  autoFocus></input>
+              </div>
+              <div className='col form-group'>
+                <label for='comment' className='text-capitalize'>comment:</label>
+                <textarea className='form-control' rows='3' id='comment' placeholder='Enter your comment'></textarea>
+              </div>
+              <div className='col'>
+                <button type='submit' className='btn btn-outline-dark btn-sm text-capitalize'>
+                  <span className='oi oi-cloud-upload'></span>
+                  save
+                </button>
+              </div>
+            </form>
           </div>
         </div>
-        {posts.map(m => {
+        {comments.map(m => {
           return (
             <div className='card' key={this.getKey()}>
               <div className='card-body'>
@@ -85,20 +101,12 @@ class Posts extends Component {
                     </a>
                   </span>
                   <br />
-                  <span className='title'>
-                    {m.title}
-                  </span>
                 </h5>
-                <h6 className='card-subtitle mb-2 text-muted text-capitalize'>{m.category}</h6>
                 <p className='card-text'>
                   <span className='oi oi-double-quote-serif-left'></span>
                   {m.body}
                   <span className='oi oi-double-quote-serif-right'></span>
                 </p>
-                <Link to={`/${m.category}/${m.title}/${m.id}`} className='card-link'>
-                  <span className='oi oi-comment-square'></span>
-                  Comments {m.commentCount}
-                </Link>
                 <a href='#' className='card-link'>
                   <span className='oi oi-pencil'></span>
                   Edit</a>
@@ -114,30 +122,17 @@ class Posts extends Component {
   }
 }
 
-const mapStateToProps = ({ posts }, props) => {
-  //props.match.params - Acessar Parâmetros de Rota no Componente
-  if (props.match) {
-    return {
-      //Posts por Categoria
-      posts: posts.filter(f => f.category === props.match.params.category),
-      //Setar Categoria p/ Título
-      category: props.match.params.category
-    }
-  } else {
-    return {
-      //Todos os Posts
-      posts
-    }
-  }
-}
-
-const mapDispatchToProps = dispatch => ({
-  list: () => dispatch(getPosts())
+const mapStateToProps = ({ comments }) => ({
+  comments
 })
 
-const PostsContainer = connect(
+const mapDispatchToProps = dispatch => ({
+  list: data => dispatch(getComments(data))
+})
+
+const CommentsContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Posts)
+)(Comments)
 
-export default PostsContainer
+export default CommentsContainer;

@@ -27,3 +27,14 @@ export const getPosts = () =>
     .then(data => {
       return data
     })
+
+/**
+ * @description Pegar todos os Comments pelo id do post
+ * @param {*} idPost 
+ */
+export const getComments = idPost =>
+  fetch(`${api}/posts/${idPost}/comments`, { method: 'GET', headers })
+    .then(res => res.json())
+    .then(data => {
+      return data
+    })

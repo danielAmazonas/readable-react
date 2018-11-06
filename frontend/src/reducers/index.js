@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 import {
   CATEGORY_REQUEST,
   ALL_POSTS,
+  ALL_COMMENTS,
 } from '../actionTypes'
 
 export const categories = (state = [], action) => {
@@ -22,7 +23,17 @@ export const posts = (state = [], action) => {
   }
 }
 
+export const comments = (state = [], action) => {
+  switch (action.type) {
+    case ALL_COMMENTS:
+      return action.comments
+    default:
+      return state
+  }
+}
+
 export const reducers = combineReducers({
   categories,
   posts,
+  comments,
 })
