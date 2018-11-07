@@ -1,22 +1,28 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getAddPost } from '../actions'
-import { v4 } from 'uuid'
 import { Link } from 'react-router-dom'
 import If from '../utils/If'
 
 class PostAdd extends Component {
   constructor(props) {
     super(props)
-    
+
     this.state = {
-      id: v4(),
+      id: this.generateId(),
       timestamp: Date.now(),
       title: '',
       author: '',
-      category: '',
+      category: 'react',
       body: ''
     }
+  }
+
+  generateId() {
+    let number = Math.random()
+    number.toString(36)
+    let id = number.toString(36).substr(2, 9)
+    return id
   }
 
   onSubmit = (event) => {
@@ -40,7 +46,7 @@ class PostAdd extends Component {
   render() {
     const { local, history } = this.props
     let { title, author, category, body } = this.state
-    
+
     return (
       <div className='col-md-12'>
         <If test={local !== 'main'}>
@@ -86,7 +92,19 @@ class PostAdd extends Component {
               </div>
               <div className='col-md-4 form-group'>
                 <label htmlFor='category' className='text-capitalize'>category:</label>
-                <input
+                <div className='input-group mb-3'>
+                  <select
+                    className='custom-select text-capitalize form-control'
+                    id='category'
+                    name='category'
+                    onChange={this.onChange}
+                    defaultValue={category}>
+                    <option className='text-capitalize' value='react'>react</option>
+                    <option className='text-capitalize' value='redux'>redux</option>
+                    <option className='text-capitalize' value='udacity'>udacity</option>
+                  </select>
+                </div>
+                {/* <input
                   id='category'
                   type='text'
                   name='category'
@@ -94,7 +112,7 @@ class PostAdd extends Component {
                   defaultValue={category}
                   onChange={this.onChange}
                   required>
-                </input>
+                </input> */}
               </div>
               <div className='col form-group'>
                 <label htmlFor='body' className='text-capitalize'>body:</label>
