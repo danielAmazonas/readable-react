@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getPosts } from '../actions'
+import { getPosts, getDelPost } from '../actions'
 import If from '../utils/If'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
@@ -25,7 +25,7 @@ class Posts extends Component {
   }
 
   render() {
-    const { local, posts, category } = this.props
+    const { local, posts, category, delPost } = this.props
 
     console.log('>>> ', posts)
 
@@ -37,6 +37,8 @@ class Posts extends Component {
       hour: '2-digit',
       minute: '2-digit'
     }
+
+    delPost.bind(this)
 
     return (
       <div className='col-md-12'>
@@ -105,9 +107,10 @@ class Posts extends Component {
                   <span className='oi oi-pencil'></span>
                   Edit
                 </Link>
-                <a href='#' className='card-link'>
+                <a href='/' onClick={e => delPost(m.id)} className='card-link'>
                   <span className='oi oi-trash'></span>
-                  Delete</a>
+                  Delete
+                </a>
               </div>
             </div>
           )
@@ -135,7 +138,8 @@ const mapStateToProps = ({ posts }, props) => {
 }
 
 const mapDispatchToProps = dispatch => ({
-  list: () => dispatch(getPosts())
+  list: () => dispatch(getPosts()),
+  delPost: id => dispatch(getDelPost(id))
 })
 
 const PostsContainer = connect(

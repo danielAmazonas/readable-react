@@ -51,6 +51,18 @@ export const addPost = (post) =>
       return data
     })
 
+export const delPost = (id) =>
+  fetch(`${api}/posts/${id}`, {
+    method: "DELETE",
+    headers: {
+      ...headers,
+      "Content-Type": "application/json"
+    }
+  })
+    .then(res => res.json())
+    .then(data => {
+      return data
+    })
 
 /**
  * @description Pega o Post pelo id para edição

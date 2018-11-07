@@ -74,6 +74,15 @@ export const getEditPost = (id, post) => {
     })
 }
 
+export const getDelPost = (id) => {
+  return dispatch => api.delPost(id)
+    .then(post => dispatch(postRequest(post)))
+    .catch(err => {
+      console.error(err)
+      dispatch(throwError())
+    })
+}
+
 export const getComments = (idPost) => {
   return dispatch => api.getComments(idPost)
     .then(comment => dispatch(commentRequest(comment)))
