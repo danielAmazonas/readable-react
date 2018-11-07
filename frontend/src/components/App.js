@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import Main from './Main'
 import Posts from './Posts'
 import PostEdit from './PostEdit'
+import PostAdd from './PostAdd'
 import Comments from './Comments'
 
 class App extends Component {
@@ -17,6 +18,7 @@ class App extends Component {
               <Route exact path='/:category' component={Posts} />
               <Route exact path='/:category/:title/:id' component={Comments} />
               <Route exact path='/edit/:id' component={PostEdit} />
+              <Route exact path='/post/add' component={PostAdd} />
             </Switch>
           </div>
         </Router>

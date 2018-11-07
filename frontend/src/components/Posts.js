@@ -57,12 +57,14 @@ class Posts extends Component {
             </h5>
           </div>
           <div className='col'>
-            <button
-              type='button'
-              className='btn btn-primary float-right text-capitalize btn-outline-dark btn-sm'>
-              <span className='oi oi-plus'></span>
-              add post
+            <Link to={`/post/add`}>
+              <button
+                type='button'
+                className='btn btn-primary float-right text-capitalize btn-outline-dark btn-sm'>
+                <span className='oi oi-plus'></span>
+                add post
             </button>
+            </Link>
           </div>
         </div>
         {posts.map(m => {

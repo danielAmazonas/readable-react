@@ -3,6 +3,7 @@ import * as api from '../api'
 import {
   CATEGORY_REQUEST,
   ALL_POSTS,
+  ADD_POST,
   EDIT_POST,
   ALL_COMMENTS,
   THROW_ERROR
@@ -21,6 +22,11 @@ const postRequest = posts => ({
 const editPost = postEdited => ({
   type: EDIT_POST,
   post: postEdited
+})
+
+const addPost = postNew => ({
+  type: ADD_POST,
+  post: postNew
 })
 
 const commentRequest = comments => ({
@@ -50,6 +56,15 @@ export const getPosts = () => {
     })
 }
 
+export const getAddPost = (post) => {
+  return dispatch => api.addPost(post)
+    .then(postNew => dispatch(addPost(postNew)))
+    .catch(err => {
+      console.error(err)
+      dispatch(throwError())
+    })
+}
+
 export const getEditPost = (id, post) => {
   return dispatch => api.editPost(id, post)
     .then(postEdited => dispatch(editPost(postEdited)))
@@ -59,7 +74,7 @@ export const getEditPost = (id, post) => {
     })
 }
 
-export const getComments = idPost => {
+export const getComments = (idPost) => {
   return dispatch => api.getComments(idPost)
     .then(comment => dispatch(commentRequest(comment)))
     .catch(err => {

@@ -14,7 +14,9 @@ const headers = {
  * @description Pegar todas as Categorias
  */
 export const getCategories = () =>
-  fetch(`${api}/categories`, { headers })
+  fetch(`${api}/categories`, {
+    headers
+  })
     .then(res => res.json())
     .then(data => data.categories)
 
@@ -22,15 +24,37 @@ export const getCategories = () =>
  * @description Pegar todos os Posts
  */
 export const getPosts = () =>
-  fetch(`${api}/posts`, { method: 'GET', headers })
+  fetch(`${api}/posts`, {
+    method: 'GET',
+    headers
+  })
     .then(res => res.json())
     .then(data => {
       return data
     })
 
 /**
+ * @description Adiciona Post
+ * @param {*} post 
+ */
+export const addPost = (post) =>
+  fetch(`${api}/posts`, {
+    method: "POST",
+    headers: {
+      ...headers,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(post)
+  })
+    .then(res => res.json())
+    .then(data => {
+      return data
+    })
+
+
+/**
  * @description Pega o Post pelo id para edição
- * @param {*} id 
+ * @param {*} idPost 
  * @param {*} post 
  */
 export const editPost = (idPost, post) =>
@@ -43,14 +67,19 @@ export const editPost = (idPost, post) =>
     body: JSON.stringify(post)
   })
     .then(res => res.json())
-
+    .then(data => {
+      return data
+    })
 
 /**
  * @description Pegar todos os Comments pelo id do post
  * @param {*} idPost 
  */
 export const getComments = idPost =>
-  fetch(`${api}/posts/${idPost}/comments`, { method: 'GET', headers })
+  fetch(`${api}/posts/${idPost}/comments`, {
+    method: 'GET',
+    headers
+  })
     .then(res => res.json())
     .then(data => {
       return data

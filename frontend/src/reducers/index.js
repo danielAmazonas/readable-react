@@ -2,6 +2,7 @@ import { combineReducers } from 'redux'
 import {
   CATEGORY_REQUEST,
   ALL_POSTS,
+  ADD_POST,
   EDIT_POST,
   ALL_COMMENTS,
 } from '../actionTypes'
@@ -38,6 +39,15 @@ export const editPost = (state = [], action) => {
   }
 }
 
+export const addPost = (state = [], action) => {
+  switch (action.type) {
+    case ADD_POST:
+      return state.concat(action.post)
+    default:
+      return state
+  }
+}
+
 export const comments = (state = [], action) => {
   switch (action.type) {
     case ALL_COMMENTS:
@@ -50,6 +60,7 @@ export const comments = (state = [], action) => {
 export const reducers = combineReducers({
   categories,
   posts,
+  addPost,
   editPost,
   comments,
 })

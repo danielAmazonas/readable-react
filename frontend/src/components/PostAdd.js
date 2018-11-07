@@ -1,20 +1,21 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getEditPost } from '../actions'
+import { getAddPost } from '../actions'
+import { v4 } from 'uuid'
 import { Link } from 'react-router-dom'
 import If from '../utils/If'
 
-class PostEdit extends Component {
+class PostAdd extends Component {
   constructor(props) {
     super(props)
     
     this.state = {
-      id: props.post.id,
+      id: v4(),
       timestamp: Date.now(),
-      title: props.post.title,
-      author: props.post.author,
-      category: props.post.category,
-      body: props.post.body
+      title: '',
+      author: '',
+      category: '',
+      body: ''
     }
   }
 
@@ -28,7 +29,7 @@ class PostEdit extends Component {
       category: this.state.category,
       body: this.state.body
     }
-    this.props.editPost(postTemp.id, postTemp)
+    this.props.addPost(postTemp)
     this.props.history.push('/')
   }
 
@@ -39,7 +40,7 @@ class PostEdit extends Component {
   render() {
     const { local, history } = this.props
     let { title, author, category, body } = this.state
-
+    
     return (
       <div className='col-md-12'>
         <If test={local !== 'main'}>
@@ -52,7 +53,7 @@ class PostEdit extends Component {
           <div className='col'>
             <h5 className='text-capitalize post-category'>
               <span className='oi oi-bookmark'></span>
-              edit post
+              add post
             </h5>
           </div>
         </div>
@@ -79,7 +80,8 @@ class PostEdit extends Component {
                   name='author'
                   className='form-control text-capitalize'
                   defaultValue={author}
-                  disabled>
+                  onChange={this.onChange}
+                  required>
                 </input>
               </div>
               <div className='col-md-4 form-group'>
@@ -88,9 +90,10 @@ class PostEdit extends Component {
                   id='category'
                   type='text'
                   name='category'
-                  className='form-control text-capitalize'
+                  className='form-control'
                   defaultValue={category}
-                  disabled>
+                  onChange={this.onChange}
+                  required>
                 </input>
               </div>
               <div className='col form-group'>
@@ -120,26 +123,17 @@ class PostEdit extends Component {
   }
 }
 
-const mapStateToProps = (state, props) => {
-  //props.match.params - Acessar Parâmetros de Rota no Componente
-  if (props.match) {
-    return {
-      post: state.posts.find(f => f.id === props.match.params.id)
-    }
-  } else {
-    return {
-      post: {}
-    }
-  }
-}
-
-const mapDispatchToProps = dispatch => ({
-  editPost: (id, post) => dispatch(getEditPost(id, post)),
+const mapStateToProps = ({ post }) => ({
+  post
 })
 
-const PostEditContainer = connect(
+const mapDispatchToProps = dispatch => ({
+  addPost: (post) => dispatch(getAddPost(post)),
+})
+
+const PostAddContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(PostEdit)
+)(PostAdd)
 
-export default PostEditContainer;
+export default PostAddContainer;
