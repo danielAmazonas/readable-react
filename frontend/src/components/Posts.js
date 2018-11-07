@@ -99,9 +99,10 @@ class Posts extends Component {
                   <span className='oi oi-comment-square'></span>
                   Comments {m.commentCount}
                 </Link>
-                <a href='#' className='card-link'>
+                <Link to={`/edit/${m.id}`} className='card-link'>
                   <span className='oi oi-pencil'></span>
-                  Edit</a>
+                  Edit
+                </Link>
                 <a href='#' className='card-link'>
                   <span className='oi oi-trash'></span>
                   Delete</a>

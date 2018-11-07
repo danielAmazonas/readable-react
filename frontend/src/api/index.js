@@ -29,6 +29,23 @@ export const getPosts = () =>
     })
 
 /**
+ * @description Pega o Post pelo id para edição
+ * @param {*} id 
+ * @param {*} post 
+ */
+export const editPost = (idPost, post) =>
+  fetch(`${api}/posts/${idPost}`, {
+    method: 'PUT',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(post)
+  })
+    .then(res => res.json())
+
+
+/**
  * @description Pegar todos os Comments pelo id do post
  * @param {*} idPost 
  */

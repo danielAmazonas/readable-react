@@ -22,13 +22,9 @@ class Comments extends Component {
   render() {
     const { local, comments } = this.props
 
-    console.log('>>>', comments)
-
     let category = this.props.match.params.category
 
     let title = this.props.match.params.title
-
-    console.log('>>>', title)
 
     const optionsDate = {
       weekday: 'long',
@@ -59,7 +55,7 @@ class Comments extends Component {
           <div className='card-body'>
             <form>
               <div className='col-md-4 form-group'>
-                <label for='author' className='text-capitalize'>author:</label>
+                <label htmlFor='author' className='text-capitalize'>author:</label>
                 <input
                   id='author'
                   type='text'
@@ -69,7 +65,7 @@ class Comments extends Component {
                   autoFocus></input>
               </div>
               <div className='col form-group'>
-                <label for='comment' className='text-capitalize'>comment:</label>
+                <label htmlFor='comment' className='text-capitalize'>comment:</label>
                 <textarea className='form-control' rows='3' id='comment' placeholder='Enter your comment'></textarea>
               </div>
               <div className='col'>
