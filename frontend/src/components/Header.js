@@ -3,10 +3,9 @@ import Categories from './Categories'
 
 const Header = ({ title, subtitle, icon }) => {
   return (
-    <div
-      className='col-md-12'
-      id='header-padding'>
+    <div className='col-md-12 header-padding'>
       <nav
+        id='animate-area'
         className='navbar navbar-dark bg-dark navbar-expand-lg'>
         <a
           className='navbar-brand text-capitalize'
