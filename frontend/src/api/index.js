@@ -84,6 +84,25 @@ export const editPost = (idPost, post) =>
     })
 
 /**
+ * @description Vota no Post
+ * @param {*} idPost 
+ * @param {*} vote 
+ */
+export const votePost = (idPost, vote) =>
+  fetch(`${api}/posts/${idPost}`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ option: vote })
+  })
+    .then(res => res.json())
+    .then(data => {
+      return data
+    })
+
+/**
  * @description Pegar todos os Comments pelo id do post
  * @param {*} idPost 
  */

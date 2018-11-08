@@ -5,6 +5,7 @@ import {
   ALL_POSTS,
   ADD_POST,
   EDIT_POST,
+  VOTE_POST,
   ALL_COMMENTS,
   THROW_ERROR
 } from '../actionTypes'
@@ -27,6 +28,11 @@ const editPost = postEdited => ({
 const addPost = postNew => ({
   type: ADD_POST,
   post: postNew
+})
+
+const votePost = post => ({
+  type: VOTE_POST,
+  post
 })
 
 const commentRequest = comments => ({
@@ -77,6 +83,15 @@ export const getEditPost = (id, post) => {
 export const getDelPost = (id) => {
   return dispatch => api.delPost(id)
     .then(post => dispatch(postRequest(post)))
+    .catch(err => {
+      console.error(err)
+      dispatch(throwError())
+    })
+}
+
+export const getVotePost = (id, vote) => {
+  return dispatch => api.votePost(id, vote)
+    .then(post => dispatch(votePost(post)))
     .catch(err => {
       console.error(err)
       dispatch(throwError())

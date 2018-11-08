@@ -4,6 +4,7 @@ import {
   ALL_POSTS,
   ADD_POST,
   EDIT_POST,
+  VOTE_POST,
   ALL_COMMENTS,
 } from '../actionTypes'
 
@@ -43,6 +44,20 @@ export const addPost = (state = [], action) => {
   switch (action.type) {
     case ADD_POST:
       return state.concat(action.post)
+    default:
+      return state
+  }
+}
+
+export const votePost = (state = [], action) => {
+  switch (action.type) {
+    case VOTE_POST:
+    return state.map(post => {
+      if (post.id === action.post.id) {
+        return action.post
+      }
+      return post
+    })
     default:
       return state
   }

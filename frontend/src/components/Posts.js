@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getPosts, getDelPost } from '../actions'
+import { getPosts, getDelPost, getVotePost } from '../actions'
 import If from '../utils/If'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
@@ -25,7 +25,7 @@ class Posts extends Component {
   }
 
   render() {
-    const { local, posts, category, delPost } = this.props
+    const { local, posts, category, delPost, votePost } = this.props
 
     console.log('>>> ', posts)
 
@@ -81,10 +81,10 @@ class Posts extends Component {
                     <span>  </span>
                     {m.voteScore}
                     <span>  </span>
-                    <a href='#' className='down'>
+                    <a href='/' onClick={e => votePost(m.id, 'downVote')} className='down'>
                       <span className='oi oi-thumb-down'></span>
                     </a>
-                    <a href='#' className='up'>
+                    <a href='/' onClick={e => votePost(m.id, 'upVote')} className='up'>
                       <span className='oi oi-thumb-up'></span>
                     </a>
                   </span>
@@ -139,7 +139,8 @@ const mapStateToProps = ({ posts }, props) => {
 
 const mapDispatchToProps = dispatch => ({
   list: () => dispatch(getPosts()),
-  delPost: id => dispatch(getDelPost(id))
+  delPost: (id) => dispatch(getDelPost(id)),
+  votePost: (data, vote) => dispatch(getVotePost(data, vote)),
 })
 
 const PostsContainer = connect(
