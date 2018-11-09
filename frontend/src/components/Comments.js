@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getComments } from '../actions'
+import { getComments, getAddComment } from '../actions'
 import { Link } from 'react-router-dom'
 import If from '../utils/If'
 
@@ -9,6 +9,22 @@ class Comments extends Component {
     super(props)
     this.keyCount = 0
     this.getKey = this.getKey.bind(this)
+
+    this.state = {
+      id: this.generateId(),
+      timestamp: Date.now(),
+      author: '',
+      body: '',
+      parentId: this.props.match.params.id
+    }
+
+  }
+
+  generateId() {
+    let number = Math.random()
+    number.toString(36)
+    let id = number.toString(36).substr(2, 9)
+    return id
   }
 
   getKey() {
@@ -19,8 +35,26 @@ class Comments extends Component {
     this.props.list(this.props.match.params.id)
   }
 
+  onSubmit = (event) => {
+    event.preventDefault()
+    const commentTemp = {
+      id: this.state.id,
+      timestamp: this.state.timestamp,
+      author: this.state.author,
+      body: this.state.body,
+      parentId: this.state.parentId
+    }
+    this.props.addComment(commentTemp)
+    this.props.history.push('/')
+  }
+
+  onChange = (event) => {
+    this.setState({ [event.target.name]: event.target.value })
+  }
+
   render() {
-    const { local, comments } = this.props
+    const { local, comments, addComment, history } = this.props
+    const { author, body } = this.state
 
     let category = this.props.match.params.category
 
@@ -53,20 +87,31 @@ class Comments extends Component {
         </div>
         <div className='card'>
           <div className='card-body'>
-            <form>
+            <form onSubmit={this.onSubmit}>
               <div className='col-md-4 form-group'>
                 <label htmlFor='author' className='text-capitalize'>author:</label>
                 <input
                   id='author'
                   type='text'
-                  className='form-control'
+                  name='author'
+                  className='form-control text-capitalize'
                   placeholder='Enter your name'
+                  defaultValue={author}
+                  onChange={this.onChange}
                   required
                   autoFocus></input>
               </div>
               <div className='col form-group'>
-                <label htmlFor='comment' className='text-capitalize'>comment:</label>
-                <textarea className='form-control' rows='3' id='comment' placeholder='Enter your comment'></textarea>
+                <label htmlFor='body' className='text-capitalize'>comment:</label>
+                <textarea
+                  id='body'
+                  className='form-control'
+                  name='body'
+                  defaultValue={body}
+                  onChange={this.onChange}
+                  required
+                  rows='3'
+                  placeholder='Enter your comment'></textarea>
               </div>
               <div className='col'>
                 <button type='submit' className='btn btn-outline-dark btn-sm text-capitalize'>
@@ -119,11 +164,12 @@ class Comments extends Component {
 }
 
 const mapStateToProps = ({ comments }) => ({
-  comments
+  comments,
 })
 
 const mapDispatchToProps = dispatch => ({
-  list: data => dispatch(getComments(data))
+  list: idPost => dispatch(getComments(idPost)),
+  addComment: post => dispatch(getAddComment(post))
 })
 
 const CommentsContainer = connect(

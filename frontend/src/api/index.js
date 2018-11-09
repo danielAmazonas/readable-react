@@ -115,3 +115,21 @@ export const getComments = idPost =>
     .then(data => {
       return data
     })
+
+/**
+ * @description Adicionar comentário
+ * @param {*} comment 
+ */
+export const addComment = comment =>
+  fetch(`${api}/comments`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(comment)
+  })
+    .then(res => res.json())
+    .then(data => {
+      return data
+    })
