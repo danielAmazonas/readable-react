@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getPosts, getDelPost, getVotePost } from '../actions'
 import If from '../utils/If'
+import Void from './Void'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 
@@ -69,6 +70,9 @@ class Posts extends Component {
             </Link>
           </div>
         </div>
+        <If test={posts.length === 0}>
+          <Void />
+        </If>
         {posts.map(m => {
           return (
             <div className='card' key={this.getKey()}>

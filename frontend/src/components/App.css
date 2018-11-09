@@ -74,11 +74,7 @@ body {
   color: #007bff;
 }
 
-@keyframes animatedBackground {
-	from { background-position: 0 0; }
-	to { background-position: 100% 0; }
-}
-
+/* Background */
 #animate-area	{ 
 	width: 100%;
 	height: 100%;
@@ -87,3 +83,24 @@ body {
 	background-repeat: repeat-x;
   animation: animatedBackground 40s linear infinite;
 }
+
+@keyframes animatedBackground {
+	from { background-position: 0 0; }
+	to { background-position: 100% 0; }
+}
+
+/* Black-Hole */
+.col-centered{
+  float: none;
+  margin: 0 auto;
+}
+
+.black-hole {
+  -webkit-animation:spin 7s linear infinite;
+  -moz-animation:spin 7s linear infinite;
+  animation:spin 7s linear infinite;
+}
+
+@-moz-keyframes spin { 50% { -moz-transform: rotateZ(360deg); } }
+@-webkit-keyframes spin { 50% { -webkit-transform: rotateZ(360deg); } }
+@keyframes spin { 50% { -webkit-transform: rotateZ(360deg); transform:rotateZ(360deg); } }
