@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getComments, getAddComment } from '../actions'
+import { getComments, getAddComment, getDelComment } from '../actions'
 import { Link } from 'react-router-dom'
 import If from '../utils/If'
 
@@ -53,7 +53,7 @@ class Comments extends Component {
   }
 
   render() {
-    const { local, comments, addComment, history } = this.props
+    const { local, comments, addComment, delComment, history } = this.props
     const { author, body } = this.state
 
     let category = this.props.match.params.category
@@ -151,7 +151,7 @@ class Comments extends Component {
                 <a href='#' className='card-link'>
                   <span className='oi oi-pencil'></span>
                   Edit</a>
-                <a href='#' className='card-link'>
+                <a href='/' onClick={e => delComment(m.id)} className='card-link'>
                   <span className='oi oi-trash'></span>
                   Delete</a>
               </div>
@@ -168,8 +168,9 @@ const mapStateToProps = ({ comments }) => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  list: idPost => dispatch(getComments(idPost)),
-  addComment: post => dispatch(getAddComment(post))
+  list: (idPost) => dispatch(getComments(idPost)),
+  delComment: (id) => dispatch(getDelComment(id)),
+  addComment: (post) => dispatch(getAddComment(post))
 })
 
 const CommentsContainer = connect(

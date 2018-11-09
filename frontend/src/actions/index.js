@@ -115,3 +115,12 @@ export const getAddComment = (comment) => {
       dispatch(throwError())
     })
 }
+
+export function getDelComment(idComment, idPost) {
+  return dispatch => api.delComment(idComment)
+    .then(comment => dispatch(commentRequest(idPost)))
+    .catch(err => {
+      console.error(err)
+      dispatch(throwError())
+    })
+}

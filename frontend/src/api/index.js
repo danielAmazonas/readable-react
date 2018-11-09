@@ -106,7 +106,7 @@ export const votePost = (idPost, vote) =>
  * @description Pegar todos os Comments pelo id do post
  * @param {*} idPost 
  */
-export const getComments = idPost =>
+export const getComments = (idPost) =>
   fetch(`${api}/posts/${idPost}/comments`, {
     method: 'GET',
     headers
@@ -120,7 +120,7 @@ export const getComments = idPost =>
  * @description Adicionar comentário
  * @param {*} comment 
  */
-export const addComment = comment =>
+export const addComment = (comment) =>
   fetch(`${api}/comments`, {
     method: 'POST',
     headers: {
@@ -128,6 +128,23 @@ export const addComment = comment =>
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(comment)
+  })
+    .then(res => res.json())
+    .then(data => {
+      return data
+    })
+
+/**
+ * @description Deletar comentário
+ * @param {*} idComment 
+ */
+export const delComment = (idComment) =>
+  fetch(`${api}/comments/${idComment}`, {
+    method: 'DELETE',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    }
   })
     .then(res => res.json())
     .then(data => {
