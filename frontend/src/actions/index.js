@@ -124,3 +124,12 @@ export function getDelComment(idComment, idPost) {
       dispatch(throwError())
     })
 }
+
+export const getVoteComment = (id, vote) => {
+  return dispatch => api.voteComment(id, vote)
+    .then(comment => dispatch(commentRequest(comment)))
+    .catch(err => {
+      console.error(err)
+      dispatch(throwError())
+    })
+}

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getComments, getAddComment, getDelComment } from '../actions'
+import { getComments, getAddComment, getDelComment, getVoteComment } from '../actions'
 import { Link } from 'react-router-dom'
 import If from '../utils/If'
 
@@ -53,7 +53,7 @@ class Comments extends Component {
   }
 
   render() {
-    const { local, comments, addComment, delComment, history } = this.props
+    const { local, comments, addComment, delComment, voteComment, history } = this.props
     const { author, body } = this.state
 
     let category = this.props.match.params.category
@@ -134,10 +134,10 @@ class Comments extends Component {
                     <span>  </span>
                     {m.voteScore}
                     <span>  </span>
-                    <a href='#' className='down'>
+                    <a href={`/${category}/${title}/${m.parentId}`} onClick={e => voteComment(m.id, 'downVote')} className='down'>
                       <span className='oi oi-thumb-down'></span>
                     </a>
-                    <a href='#' className='up'>
+                    <a href={`/${category}/${title}/${m.parentId}`} onClick={e => voteComment(m.id, 'upVote')} className='up'>
                       <span className='oi oi-thumb-up'></span>
                     </a>
                   </span>
@@ -170,7 +170,8 @@ const mapStateToProps = ({ comments }) => ({
 const mapDispatchToProps = dispatch => ({
   list: (idPost) => dispatch(getComments(idPost)),
   delComment: (id) => dispatch(getDelComment(id)),
-  addComment: (post) => dispatch(getAddComment(post))
+  addComment: (post) => dispatch(getAddComment(post)),
+  voteComment: (data, vote) => dispatch(getVoteComment(data, vote)),
 })
 
 const CommentsContainer = connect(

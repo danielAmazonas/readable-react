@@ -150,3 +150,22 @@ export const delComment = (idComment) =>
     .then(data => {
       return data
     })
+
+/**
+ * @description Vota no Comment
+ * @param {*} idComment 
+ * @param {*} vote 
+ */
+export const voteComment = (idComment, vote) =>
+  fetch(`${api}/comments/${idComment}`, {
+    method: 'POST',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ option: vote })
+  })
+    .then(res => res.json())
+    .then(data => {
+      return data
+    })
