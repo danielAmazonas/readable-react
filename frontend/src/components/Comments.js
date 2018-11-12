@@ -148,9 +148,10 @@ class Comments extends Component {
                   {m.body}
                   <span className='oi oi-double-quote-serif-right'></span>
                 </p>
-                <a href='#' className='card-link'>
+                <Link to={`/${category}/${title}/${m.id}/edit/comment/`} className='card-link'>
                   <span className='oi oi-pencil'></span>
-                  Edit</a>
+                  Edit
+                </Link>
                 <a href='/' onClick={e => delComment(m.id)} className='card-link'>
                   <span className='oi oi-trash'></span>
                   Delete</a>

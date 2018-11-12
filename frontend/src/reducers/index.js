@@ -5,6 +5,7 @@ import {
   ADD_POST,
   EDIT_POST,
   ALL_COMMENTS,
+  EDIT_COMMENT,
   ADD_COMMENT,
 } from '../actionTypes'
 
@@ -58,6 +59,20 @@ export const comments = (state = [], action) => {
   }
 }
 
+export const editComment = (state = [], action) => {
+  switch (action.type) {
+    case EDIT_COMMENT:
+      return state.map(comment => {
+        if (comment.id === action.comment.id) {
+          return action.comment
+        }
+        return comment
+      })
+    default:
+      return state
+  }
+}
+
 export const addComment = (state = [], action) => {
   switch (action.type) {
     case ADD_COMMENT:
@@ -73,5 +88,6 @@ export const reducers = combineReducers({
   addPost,
   editPost,
   comments,
+  editComment,
   addComment,
 })

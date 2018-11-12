@@ -117,6 +117,25 @@ export const getComments = (idPost) =>
     })
 
 /**
+ * @description Editar comentário
+ * @param {*} idComment 
+ * @param {*} comment 
+ */
+export const editComment = (idComment, comment) =>
+  fetch(`${api}/comments/${idComment}`, {
+    method: 'PUT',
+    headers: {
+      ...headers,
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(comment)
+  })
+    .then(res => res.json())
+    .then(data => {
+      return data
+    })
+
+/**
  * @description Adicionar comentário
  * @param {*} comment 
  */
@@ -152,7 +171,7 @@ export const delComment = (idComment) =>
     })
 
 /**
- * @description Vota no Comment
+ * @description Vota comentário
  * @param {*} idComment 
  * @param {*} vote 
  */

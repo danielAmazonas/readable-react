@@ -27,9 +27,7 @@ class Posts extends Component {
 
   render() {
     const { local, posts, category, delPost, votePost } = this.props
-
-    console.log('>>> ', posts)
-
+    
     const optionsDate = {
       weekday: 'long',
       year: 'numeric',
@@ -39,7 +37,7 @@ class Posts extends Component {
       minute: '2-digit'
     }
 
-    delPost.bind(this)
+    //delPost.bind(this)
 
     return (
       <div className='col-md-12'>
@@ -136,7 +134,7 @@ const mapStateToProps = ({ posts }, props) => {
   } else {
     return {
       //Todos os Posts
-      posts
+      posts: posts
     }
   }
 }
