@@ -22,25 +22,25 @@ Para começar a desenvolver imediatamente:
 
 - Instalar e iniciar o servidor de API
   - `$ cd api-server`
-  - `$ npm install` ou` $ yarn install`
+  - `$ npm install` ou `$ yarn install`
   - `$ node server.js`
 - Em outra janela de terminal, inicie o frontend
   - `$ cd frontend`
-  - `$ npm install` ou` $ yarn install`
+  - `$ npm install` ou `$ yarn install`
 
 #### 3. Inicie o aplicativo com "npm start"
 
 Para iniciar o servidor React e executar o aplicativo:
 
-`$ npm start` ou` $ yarn start`
+`$ npm start` ou `$ yarn start`
 
 #### 4. Abra seu navegador em http://localhost:3000/
 
 É assim que o aplicativo deve ser, depois de aberto no navegador.
 
-! [posts] ()
+! [posts] (https://github.com/danielAmazonas/readable-react/blob/master/frontend/screenshots/posts.png)
 
-! [comments-details] ()
+! [comments-details] (https://github.com/danielAmazonas/readable-react/blob/master/frontend/screenshots/comments-details.png)
 
 ### 5. Udacity:
 
