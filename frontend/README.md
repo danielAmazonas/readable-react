@@ -42,6 +42,10 @@ Para iniciar o servidor React e executar o aplicativo:
 
 ![comments-details](https://github.com/danielAmazonas/readable-react/blob/master/frontend/screenshots/comments-details.png)
 
+![post-edit](https://github.com/danielAmazonas/readable-react/blob/master/frontend/screenshots/post-edit.png)
+
+![comment-edit](https://github.com/danielAmazonas/readable-react/blob/master/frontend/screenshots/comment-edit.png)
+
 ### 5. Udacity:
 
 - [Guia de Estilo CSS do Udacity] (http://udacity.github.io/frontend-nanodegree-styleguide/css.html)
