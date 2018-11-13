@@ -48,10 +48,23 @@ Para iniciar o servidor React e executar o aplicativo:
 
 ![empty](https://github.com/danielAmazonas/readable-react/blob/master/frontend/screenshots/empty.png)
 
-### 5. Udacity:
+### Recursos e Documentação:
 
-- [Guia de Estilo CSS do Udacity] (http://udacity.github.io/frontend-nanodegree-styleguide/css.html)
-- [Guia de Estilo HTML Udacity] (http://udacity.github.io/frontend-nanodegree-styleguide/index.html)
-- [Guia de Estilo JavaScript Udacity] (http://udacity.github.io/frontend-nanodegree-styleguide/javascript.html)
+- [Create-react-app Documentation](https://github.com/facebookincubator/create-react-app)
+- [React Router Documentation](http://knowbody.github.io/react-router-docs/)
+- [React Training/React Router](https://reacttraining.com/react-router/web/api/BrowserRouter)
+- [React API](https://facebook.github.io/react/docs/react-api.html)
+- [Prop-Types Documentation](https://reactjs.org/docs/typechecking-with-proptypes.html)
+- [Redux](https://redux.js.org/)
+- [Bootstrap Documentation](https://getbootstrap.com/docs/4.1/getting-started/introduction/)
+- [Open-Iconic](https://useiconic.com/open)
+- [Fonts-Google](https://fonts.googleapis)
+- [Array-Sort](https://www.npmjs.com/package/array-sort)
+
+### Recursos Udacity:
+
+- [Guia de Estilo CSS do Udacity](http://udacity.github.io/frontend-nanodegree-styleguide/css.html)
+- [Guia de Estilo HTML Udacity](http://udacity.github.io/frontend-nanodegree-styleguide/index.html)
+- [Guia de Estilo JavaScript Udacity](http://udacity.github.io/frontend-nanodegree-styleguide/javascript.html)
 
 _Este projeto está licenciado sob os termos da licença do MIT._
