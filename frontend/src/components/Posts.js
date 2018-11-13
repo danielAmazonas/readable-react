@@ -13,6 +13,10 @@ class Posts extends Component {
     this.getKey = this.getKey.bind(this)
   }
 
+  state = {
+    posts: []
+  }
+
   getKey() {
     return this.keyCount++
   }
@@ -25,9 +29,27 @@ class Posts extends Component {
     this.props.list()
   }
 
+  //Ordernar - baixo p/ cima
+  sort = (posts) => {
+    let arraySort = require('array-sort')
+    this.setState({
+      posts: arraySort(posts, 'timestamp')
+    })
+    console.log(arraySort(posts, 'timestamp'))
+  }
+
+  //Ordernar - cima p/ baixo
+  reverse = (posts) => {
+    let arraySort = require('array-sort')
+    this.setState({
+      posts: arraySort(posts, 'timestamp').reverse()
+    })
+    console.log(arraySort(posts, 'timestamp').reverse())
+  }
+
   render() {
     const { local, posts, category, delPost, votePost } = this.props
-    
+
     const optionsDate = {
       weekday: 'long',
       year: 'numeric',
@@ -36,8 +58,6 @@ class Posts extends Component {
       hour: '2-digit',
       minute: '2-digit'
     }
-
-    //delPost.bind(this)
 
     return (
       <div className='col-md-12'>
@@ -56,6 +76,14 @@ class Posts extends Component {
                   'redux posts' : (category === 'udacity') ?
                     'udacity posts' : 'all posts')}
             </h5>
+            <a href='#' onClick={e => this.sort(posts)} className='text-capitalize'>
+              <span className='oi oi-sort-ascending'></span>
+              ascending
+            </a>
+            <a href='#' onClick={e => this.reverse(posts)} className='text-capitalize'>
+              <span className='oi oi-sort-descending'></span>
+              descending
+            </a>
           </div>
           <div className='col'>
             <Link to={`/post/add`}>

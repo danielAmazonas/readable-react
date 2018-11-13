@@ -38,8 +38,6 @@ class CommentEdit extends Component {
     const { local, comment, history } = this.props
     const { author, body } = this.state
 
-    console.log('>>>> ', comment.id)
-
     return (
       <div className='col-md-12'>
         <If test={local !== 'main'}>
@@ -52,7 +50,9 @@ class CommentEdit extends Component {
           <div className='col'>
             <h5 className='text-capitalize post-category'>
               <span className='oi oi-bookmark'></span>
-              edit comment - <span className='category-comments'></span>
+              edit comment - {this.props.match.params.title} <span className='category-comments'>
+                {this.props.match.params.category}
+              </span>
             </h5>
           </div>
         </div>
