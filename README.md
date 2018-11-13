@@ -21,12 +21,12 @@ Para clonar e executar este aplicativo, você precisará do Git instalado no seu
 Para começar a desenvolver imediatamente:
 
 * Instalar e iniciar o servidor de API
-  * `$ cd api-server`
-  * `$ npm install` ou `$ yarn install`
+  * `$ cd api-server`
+  * `$ npm install` ou `$ yarn install`
   * `$ node server.js`
 * Em outra janela de terminal, inicie o frontend
-  * `$ cd frontend`
-  * `$ npm install` ou `$ yarn install`
+  * `$ cd frontend`
+  * `$ npm install` ou `$ yarn install`
 
 #### 3. Inicie o aplicativo com "npm start"
 
