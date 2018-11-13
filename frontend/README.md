@@ -20,13 +20,13 @@ Para clonar e executar este aplicativo, você precisará do Git instalado no seu
 
 Para começar a desenvolver imediatamente:
 
-- Instalar e iniciar o servidor de API
-  - `$ cd api-server`
-  - `$ npm install` ou `$ yarn install`
-  - `$ node server.js`
-- Em outra janela de terminal, inicie o frontend
-  - `$ cd frontend`
-  - `$ npm install` ou `$ yarn install`
+-Instalar e iniciar o servidor de API
+  -`$ cd api-server`
+  -`$ npm install` ou `$ yarn install`
+  -`$ node server.js`
+-Em outra janela de terminal, inicie o frontend
+  -`$ cd frontend`
+  -`$ npm install` ou `$ yarn install`
 
 #### 3. Inicie o aplicativo com "npm start"
 
@@ -38,9 +38,9 @@ Para iniciar o servidor React e executar o aplicativo:
 
 É assim que o aplicativo deve ser, depois de aberto no navegador.
 
-! [posts] (https://github.com/danielAmazonas/readable-react/blob/master/frontend/screenshots/posts.png)
+![posts](https://github.com/danielAmazonas/readable-react/blob/master/frontend/screenshots/posts.png)
 
-! [comments-details] (https://github.com/danielAmazonas/readable-react/blob/master/frontend/screenshots/comments-details.png)
+![comments-details](https://github.com/danielAmazonas/readable-react/blob/master/frontend/screenshots/comments-details.png)
 
 ### 5. Udacity:
 
