@@ -17,10 +17,10 @@ class App extends Component {
             <Switch>
               <Route exact path='/' component={Main} />
               <Route exact path='/:category' component={Posts} />
-              <Route exact path='/:category/:title/:id' component={Comments} />
-              <Route exact path='/edit/:id' component={PostEdit} />
-              <Route exact path='/post/add' component={PostAdd} />
-              <Route exact path='/:category/:title/:id/edit/comment/' component={CommentEdit} />
+              <Route exact path='/:category/:id' component={Comments} />
+              <Route exact path='/post/edit/:id' component={PostEdit} />
+              <Route exact path='/post/add/new' component={PostAdd} />
+              <Route exact path='/:category/:id/comment/edit/' component={CommentEdit} />
             </Switch>
           </div>
         </Router>

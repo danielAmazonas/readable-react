@@ -58,8 +58,6 @@ class Comments extends Component {
 
     let category = this.props.match.params.category
 
-    let title = this.props.match.params.title
-
     const optionsDate = {
       weekday: 'long',
       year: 'numeric',
@@ -81,7 +79,7 @@ class Comments extends Component {
           <div className='col'>
             <h5 className='text-capitalize post-category'>
               <span className='oi oi-bookmark'></span>
-              comments - {title} <span className='category-comments'>{category}</span>
+              post details <span className='category-comments'>{category}</span>
             </h5>
           </div>
         </div>
@@ -134,10 +132,10 @@ class Comments extends Component {
                     <span>  </span>
                     {m.voteScore}
                     <span>  </span>
-                    <a href={`/${category}/${title}/${m.parentId}`} onClick={e => voteComment(m.id, 'downVote')} className='down'>
+                    <a href={`/${category}/${m.parentId}`} onClick={e => voteComment(m.id, 'downVote')} className='down'>
                       <span className='oi oi-thumb-down'></span>
                     </a>
-                    <a href={`/${category}/${title}/${m.parentId}`} onClick={e => voteComment(m.id, 'upVote')} className='up'>
+                    <a href={`/${category}/${m.parentId}`} onClick={e => voteComment(m.id, 'upVote')} className='up'>
                       <span className='oi oi-thumb-up'></span>
                     </a>
                   </span>
@@ -148,7 +146,7 @@ class Comments extends Component {
                   {m.body}
                   <span className='oi oi-double-quote-serif-right'></span>
                 </p>
-                <Link to={`/${category}/${title}/${m.id}/edit/comment/`} className='card-link'>
+                <Link to={`/${category}/${m.id}/comment/edit/`} className='card-link'>
                   <span className='oi oi-pencil'></span>
                   Edit
                 </Link>

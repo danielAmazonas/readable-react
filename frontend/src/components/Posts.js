@@ -76,17 +76,24 @@ class Posts extends Component {
                   'redux posts' : (category === 'udacity') ?
                     'udacity posts' : 'all posts')}
             </h5>
-            <a href='#' onClick={e => this.sort(posts)} className='text-capitalize'>
+            <button
+              type='button'
+              onClick={e => this.sort(posts)}
+              className='btn btn-primary text-capitalize btn-outline-dark btn-sm'>
               <span className='oi oi-sort-ascending'></span>
               ascending
-            </a>
-            <a href='#' onClick={e => this.reverse(posts)} className='text-capitalize'>
+            </button>
+            <span>   </span>
+            <button
+              type='button'
+              onClick={e => this.reverse(posts)}
+              className='btn btn-primary text-capitalize btn-outline-dark btn-sm'>
               <span className='oi oi-sort-descending'></span>
               descending
-            </a>
+            </button>
           </div>
           <div className='col'>
-            <Link to={`/post/add`}>
+            <Link to={`/post/add/new`}>
               <button
                 type='button'
                 className='btn btn-primary float-right text-capitalize btn-outline-dark btn-sm'>
@@ -129,11 +136,11 @@ class Posts extends Component {
                   {m.body}
                   <span className='oi oi-double-quote-serif-right'></span>
                 </p>
-                <Link to={`/${m.category}/${m.title}/${m.id}`} className='card-link'>
+                <Link to={`/${m.category}/${m.id}`} className='card-link'>
                   <span className='oi oi-comment-square'></span>
                   Comments {m.commentCount}
                 </Link>
-                <Link to={`/edit/${m.id}`} className='card-link'>
+                <Link to={`/post/edit/${m.id}`} className='card-link'>
                   <span className='oi oi-pencil'></span>
                   Edit
                 </Link>
