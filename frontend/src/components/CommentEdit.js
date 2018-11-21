@@ -27,7 +27,7 @@ class CommentEdit extends Component {
       parentId: this.state.parentId
     }
     this.props.editComment(commentTemp.id, commentTemp)
-    this.props.history.push('/')
+    this.props.history.push(`/`)
   }
 
   onChange = (event) => {
@@ -35,16 +35,16 @@ class CommentEdit extends Component {
   }
 
   render() {
-    const { local, comment, history } = this.props
+    const { local } = this.props
     const { author, body } = this.state
 
     return (
       <div className='col-md-12'>
         <If test={local !== 'main'}>
-          <Link to='/' className='btn btn-outline-dark btn-sm btn-back'>
+          <a href='/' className='btn btn-outline-dark btn-sm btn-back'>
             <span className='oi oi-action-undo'></span>
             Back Main
-           </Link>
+           </a>
         </If>
         <div className='row'>
           <div className='col'>

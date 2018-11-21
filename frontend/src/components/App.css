@@ -60,19 +60,21 @@ body {
 }
 
 .down {
-  color: red;
+  color: red !important;
+  cursor: pointer;
 }
 
 .down:hover {
-  color: red;
+  color: red !important;
 }
 
 .up {
-  color: #007bff;
+  color: #007bff !important;
+  cursor: pointer;
 }
 
 .up:hover {
-  color: #007bff;
+  color: #007bff !important;
 }
 
 /* Background */

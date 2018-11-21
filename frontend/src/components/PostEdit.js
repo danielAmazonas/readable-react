@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getEditPost } from '../actions'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import If from '../utils/If'
 
 class PostEdit extends Component {
@@ -142,4 +142,4 @@ const PostEditContainer = connect(
   mapDispatchToProps
 )(PostEdit)
 
-export default PostEditContainer;
+export default withRouter(PostEditContainer)

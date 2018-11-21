@@ -5,9 +5,14 @@ import {
   ALL_POSTS,
   ADD_POST,
   EDIT_POST,
+  POST_BY_ID,
+  VOTE_POST,
+  DEL_POST,
   ALL_COMMENTS,
   EDIT_COMMENT,
   ADD_COMMENT,
+  VOTE_COMMENT,
+  DEL_COMMENT,
   THROW_ERROR
 } from '../actionTypes'
 
@@ -26,9 +31,24 @@ const editPost = postEdited => ({
   post: postEdited
 })
 
+const postById = post => ({
+  type: POST_BY_ID,
+  post: post
+})
+
 const addPost = postNew => ({
   type: ADD_POST,
   post: postNew
+})
+
+const votePost = post => ({
+  type: VOTE_POST,
+  post
+})
+
+const delPost = post => ({
+  type: DEL_POST,
+  post
 })
 
 const commentRequest = comments => ({
@@ -36,14 +56,24 @@ const commentRequest = comments => ({
   comments
 })
 
-const editComment = commentNew => ({
+const editComment = commentEdited => ({
   type: EDIT_COMMENT,
-  comment: commentNew
+  comment: commentEdited
 })
 
 const addComment = commentNew => ({
   type: ADD_COMMENT,
   comment: commentNew
+})
+
+const voteComment = comment => ({
+  type: VOTE_COMMENT,
+  comment
+})
+
+const delComment = comment => ({
+  type: DEL_COMMENT,
+  comment
 })
 
 export const throwError = () => ({
@@ -86,9 +116,18 @@ export const getEditPost = (id, post) => {
     })
 }
 
+export const getPostById = (id) => {
+  return dispatch => api.postById(id)
+    .then(post => dispatch(postById(post)))
+    .catch(err => {
+      console.error(err)
+      dispatch(throwError())
+    })
+}
+
 export const getDelPost = (id) => {
   return dispatch => api.delPost(id)
-    .then(post => dispatch(postRequest(post)))
+    .then(post => dispatch(delPost(post)))
     .catch(err => {
       console.error(err)
       dispatch(throwError())
@@ -97,7 +136,7 @@ export const getDelPost = (id) => {
 
 export const getVotePost = (id, vote) => {
   return dispatch => api.votePost(id, vote)
-    .then(post => dispatch(postRequest(post)))
+    .then(post => dispatch(votePost(post)))
     .catch(err => {
       console.error(err)
       dispatch(throwError())
@@ -133,7 +172,7 @@ export const getAddComment = (comment) => {
 
 export function getDelComment(idComment, idPost) {
   return dispatch => api.delComment(idComment)
-    .then(comment => dispatch(commentRequest(idPost)))
+    .then(comment => dispatch(delComment(idPost)))
     .catch(err => {
       console.error(err)
       dispatch(throwError())
@@ -142,7 +181,7 @@ export function getDelComment(idComment, idPost) {
 
 export const getVoteComment = (id, vote) => {
   return dispatch => api.voteComment(id, vote)
-    .then(comment => dispatch(commentRequest(comment)))
+    .then(comment => dispatch(voteComment(comment)))
     .catch(err => {
       console.error(err)
       dispatch(throwError())

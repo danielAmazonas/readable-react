@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getComments, getAddComment, getDelComment, getVoteComment } from '../actions'
+import { getComments, getAddComment, getDelComment, getVoteComment, getPostById } from '../actions'
 import { Link } from 'react-router-dom'
+import CommentVote from './CommentVote'
 import If from '../utils/If'
+import Page404 from './Page404';
 
-class Comments extends Component {
+class PostDetails extends Component {
   constructor(props) {
     super(props)
     this.keyCount = 0
@@ -15,9 +17,8 @@ class Comments extends Component {
       timestamp: Date.now(),
       author: '',
       body: '',
-      parentId: this.props.match.params.id
+      parentId: this.props.match.params.post_id
     }
-
   }
 
   generateId() {
@@ -32,7 +33,7 @@ class Comments extends Component {
   }
 
   componentDidMount() {
-    this.props.list(this.props.match.params.id)
+    this.props.list(this.props.match.params.post_id)
   }
 
   onSubmit = (event) => {
@@ -45,18 +46,33 @@ class Comments extends Component {
       parentId: this.state.parentId
     }
     this.props.addComment(commentTemp)
-    this.props.history.push('/')
+    document.getElementById('author').value = ''
+    document.getElementById('body').value = ''
+    //this.props.history.push('/')
   }
 
   onChange = (event) => {
     this.setState({ [event.target.name]: event.target.value })
   }
 
+  page404() {
+    if (this.props.comments.length === 0) {
+      this.props.history.push(`/page/not/found/error/404`)
+    }
+  }
+
   render() {
-    const { local, comments, addComment, delComment, voteComment, history } = this.props
+    const { local, comments, delComment, voteComment, postById } = this.props
     const { author, body } = this.state
 
     let category = this.props.match.params.category
+
+    // postById(this.state.parentId).then((object) => {
+    //   if (!object.post.id) {
+    //     // { window.location = 'http://localhost:3000/error.html' }
+    //     console.log('>>>>', object.post.id)
+    //   }
+    // })
 
     const optionsDate = {
       weekday: 'long',
@@ -67,6 +83,8 @@ class Comments extends Component {
       minute: '2-digit'
     }
 
+    //this.page404()
+
     return (
       <div className='col-md-12'>
         <If test={local !== 'main'}>
@@ -75,6 +93,7 @@ class Comments extends Component {
             Back Main
            </Link>
         </If>
+
         <div className='row'>
           <div className='col'>
             <h5 className='text-capitalize post-category'>
@@ -128,14 +147,12 @@ class Comments extends Component {
                   <span className='author'>{m.author}</span>
                   <span> </span>
                   <span className='date'>{m.timestamp = new Date(m.timestamp).toLocaleDateString('en-US', optionsDate)}</span>
-                  <span className='text-capitalize float-right score'>score:
-                    <span>  </span>
-                    {m.voteScore}
-                    <span>  </span>
-                    <a href={`/${category}/${m.parentId}`} onClick={e => voteComment(m.id, 'downVote')} className='down'>
+                  <span className='text-capitalize float-right score row'>score:
+                    <CommentVote voteScore={m.voteScore} />
+                    <a onClick={e => voteComment(m.id, 'downVote')} className='down'>
                       <span className='oi oi-thumb-down'></span>
                     </a>
-                    <a href={`/${category}/${m.parentId}`} onClick={e => voteComment(m.id, 'upVote')} className='up'>
+                    <a onClick={e => voteComment(m.id, 'upVote')} className='up'>
                       <span className='oi oi-thumb-up'></span>
                     </a>
                   </span>
@@ -171,11 +188,12 @@ const mapDispatchToProps = dispatch => ({
   delComment: (id) => dispatch(getDelComment(id)),
   addComment: (post) => dispatch(getAddComment(post)),
   voteComment: (data, vote) => dispatch(getVoteComment(data, vote)),
+  postById: (idPost) => dispatch(getPostById(idPost)),
 })
 
-const CommentsContainer = connect(
+const PostDetailsContainer = connect(
   mapStateToProps,
   mapDispatchToProps
-)(Comments)
+)(PostDetails)
 
-export default CommentsContainer;
+export default PostDetailsContainer

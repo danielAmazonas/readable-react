@@ -1,93 +1,12 @@
 import { combineReducers } from 'redux'
-import {
-  CATEGORY_REQUEST,
-  ALL_POSTS,
-  ADD_POST,
-  EDIT_POST,
-  ALL_COMMENTS,
-  EDIT_COMMENT,
-  ADD_COMMENT,
-} from '../actionTypes'
+import Categories from './Categories'
+import Posts from './Posts'
+import Comments from './Comments'
 
-export const categories = (state = [], action) => {
-  switch (action.type) {
-    case CATEGORY_REQUEST:
-      return action.categories
-    default:
-      return state
-  }
-}
-
-export const posts = (state = [], action) => {
-  switch (action.type) {
-    case ALL_POSTS:
-      return action.posts
-    default:
-      return state
-  }
-}
-
-export const editPost = (state = [], action) => {
-  switch (action.type) {
-    case EDIT_POST:
-      return state.map(post => {
-        if (post.id === action.post.id) {
-          return action.post
-        }
-        return post
-      })
-    default:
-      return state
-  }
-}
-
-export const addPost = (state = [], action) => {
-  switch (action.type) {
-    case ADD_POST:
-      return state.concat(action.post)
-    default:
-      return state
-  }
-}
-
-export const comments = (state = [], action) => {
-  switch (action.type) {
-    case ALL_COMMENTS:
-      return action.comments
-    default:
-      return state
-  }
-}
-
-export const editComment = (state = [], action) => {
-  switch (action.type) {
-    case EDIT_COMMENT:
-      return state.map(comment => {
-        if (comment.id === action.comment.id) {
-          return action.comment
-        }
-        return comment
-      })
-    default:
-      return state
-  }
-}
-
-export const addComment = (state = [], action) => {
-  switch (action.type) {
-    case ADD_COMMENT:
-      return state.concat(action.comment)
-    default:
-      return state
-  }
-}
-
-export const reducers = combineReducers({
-  categories,
-  posts,
-  addPost,
-  editPost,
-  comments,
-  editComment,
-  addComment,
+const reducers = combineReducers({
+  categories: Categories,
+  posts: Posts,
+  comments: Comments
 })
+
+export default reducers

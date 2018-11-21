@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getPosts, getDelPost, getVotePost } from '../actions'
 import If from '../utils/If'
+import PostVote from './PostVote'
 import Void from './Void'
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
@@ -14,7 +15,7 @@ class Posts extends Component {
   }
 
   state = {
-    posts: []
+    posts: [],
   }
 
   getKey() {
@@ -35,7 +36,6 @@ class Posts extends Component {
     this.setState({
       posts: arraySort(posts, 'timestamp')
     })
-    console.log(arraySort(posts, 'timestamp'))
   }
 
   //Ordernar - cima p/ baixo
@@ -44,7 +44,6 @@ class Posts extends Component {
     this.setState({
       posts: arraySort(posts, 'timestamp').reverse()
     })
-    console.log(arraySort(posts, 'timestamp').reverse())
   }
 
   render() {
@@ -62,10 +61,10 @@ class Posts extends Component {
     return (
       <div className='col-md-12'>
         <If test={local !== 'main'}>
-          <Link to='/' className='btn btn-outline-dark btn-sm btn-back'>
+          <a href='/' className='btn btn-outline-dark btn-sm btn-back'>
             <span className='oi oi-action-undo'></span>
             Back Main
-           </Link>
+           </a>
         </If>
         <div className='row'>
           <div className='col'>
@@ -114,14 +113,12 @@ class Posts extends Component {
                   <span className='author'>{m.author}</span>
                   <span> </span>
                   <span className='date'>{m.timestamp = new Date(m.timestamp).toLocaleDateString('en-US', optionsDate)}</span>
-                  <span className='text-capitalize float-right score'>score:
-                    <span>  </span>
-                    {m.voteScore}
-                    <span>  </span>
-                    <a href='/' onClick={e => votePost(m.id, 'downVote')} className='down'>
+                  <span className='text-capitalize float-right score row'>score:
+                    <PostVote voteScore={m.voteScore} />
+                    <a onClick={e => votePost(m.id, 'downVote')} className='down'>
                       <span className='oi oi-thumb-down'></span>
                     </a>
-                    <a href='/' onClick={e => votePost(m.id, 'upVote')} className='up'>
+                    <a onClick={e => votePost(m.id, 'upVote')} className='up'>
                       <span className='oi oi-thumb-up'></span>
                     </a>
                   </span>
@@ -138,7 +135,7 @@ class Posts extends Component {
                 </p>
                 <Link to={`/${m.category}/${m.id}`} className='card-link'>
                   <span className='oi oi-comment-square'></span>
-                  Comments {m.commentCount}
+                  {`Post Details <-> Comments ${m.commentCount}`}
                 </Link>
                 <Link to={`/post/edit/${m.id}`} className='card-link'>
                   <span className='oi oi-pencil'></span>

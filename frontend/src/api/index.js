@@ -84,6 +84,19 @@ export const editPost = (idPost, post) =>
     })
 
 /**
+ * @description Pegar Post pelo ID
+ * @param {*} id 
+ */
+export const postById = (id) =>
+  fetch(`${api}/posts/${id}`, {
+    headers
+  })
+    .then(res => res.json())
+    .then(data => {
+      return data
+    })
+
+/**
  * @description Vota no Post
  * @param {*} idPost 
  * @param {*} vote 
