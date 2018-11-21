@@ -34,9 +34,7 @@ class PostDetails extends Component {
 
   componentDidMount() {
     if (!this.props.post) {
-      console.log('>>>', this.props.post)
       this.props.postById(this.props.match.params.post_id)
-      console.log('>>>', this.props.post)
     }
     this.props.list(this.props.match.params.post_id)
   }
