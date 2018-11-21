@@ -4,6 +4,7 @@ import { getComments, getAddComment, getDelComment, getVoteComment, getPostById 
 import { Link } from 'react-router-dom'
 import CommentVote from './CommentVote'
 import If from '../utils/If'
+import Page404 from './Page404'
 
 class PostDetails extends Component {
   constructor(props) {
@@ -32,8 +33,10 @@ class PostDetails extends Component {
   }
 
   componentDidMount() {
-    if (this.props.post === '' || this.props.post == null) {
-      return false
+    if (!this.props.post) {
+      console.log('>>>', this.props.post)
+      this.props.postById(this.props.match.params.post_id)
+      console.log('>>>', this.props.post)
     }
     this.props.list(this.props.match.params.post_id)
   }
@@ -63,10 +66,6 @@ class PostDetails extends Component {
 
     let category = this.props.match.params.category
 
-    if (!post) {
-      this.props.history.push(`/page/not/found/error/404`)
-    }
-
     const optionsDate = {
       weekday: 'long',
       year: 'numeric',
@@ -89,11 +88,11 @@ class PostDetails extends Component {
           <div className='col'>
             <h5 className='text-capitalize post-category'>
               <span className='oi oi-bookmark'></span>
-              post details <span className='category-comments'>{category}</span>
+              post details
             </h5>
           </div>
         </div>
-        
+
         <div className='card'>
           <div className='card-body'>
             <h5 className='card-title text-capitalize'>
@@ -188,7 +187,7 @@ class PostDetails extends Component {
           )
         })}
       </div>
-    ) : false
+    ) : <Page404 />
   }
 }
 

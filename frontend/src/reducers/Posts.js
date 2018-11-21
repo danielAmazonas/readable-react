@@ -21,7 +21,12 @@ export default function (state = STATE_INIT, action) {
         return post
       })
     case POST_BY_ID:
-      return action.post
+      return state.map(post => {
+        if (post.id === action.post.id) {
+          return action.post
+        }
+        return post
+      })
     case ADD_POST:
       return state.concat(action.post)
     case VOTE_POST:
