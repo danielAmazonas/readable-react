@@ -4,7 +4,6 @@ import { getComments, getAddComment, getDelComment, getVoteComment, getPostById 
 import { Link } from 'react-router-dom'
 import CommentVote from './CommentVote'
 import If from '../utils/If'
-import Page404 from './Page404';
 
 class PostDetails extends Component {
   constructor(props) {
@@ -33,6 +32,9 @@ class PostDetails extends Component {
   }
 
   componentDidMount() {
+    if (this.props.post === '' || this.props.post == null) {
+      return false
+    }
     this.props.list(this.props.match.params.post_id)
   }
 
@@ -55,24 +57,15 @@ class PostDetails extends Component {
     this.setState({ [event.target.name]: event.target.value })
   }
 
-  page404() {
-    if (this.props.comments.length === 0) {
-      this.props.history.push(`/page/not/found/error/404`)
-    }
-  }
-
   render() {
-    const { local, comments, delComment, voteComment, postById } = this.props
+    const { local, comments, delComment, voteComment, postById, post } = this.props
     const { author, body } = this.state
 
     let category = this.props.match.params.category
 
-    // postById(this.state.parentId).then((object) => {
-    //   if (!object.post.id) {
-    //     // { window.location = 'http://localhost:3000/error.html' }
-    //     console.log('>>>>', object.post.id)
-    //   }
-    // })
+    if (!post) {
+      this.props.history.push(`/page/not/found/error/404`)
+    }
 
     const optionsDate = {
       weekday: 'long',
@@ -83,9 +76,7 @@ class PostDetails extends Component {
       minute: '2-digit'
     }
 
-    //this.page404()
-
-    return (
+    return post ? (
       <div className='col-md-12'>
         <If test={local !== 'main'}>
           <Link to='/' className='btn btn-outline-dark btn-sm btn-back'>
@@ -102,10 +93,32 @@ class PostDetails extends Component {
             </h5>
           </div>
         </div>
+        
+        <div className='card'>
+          <div className='card-body'>
+            <h5 className='card-title text-capitalize'>
+              <span className='author'>{post.author}</span>
+              <span> </span>
+              <span className='date'>{post.timestamp = new Date(post.timestamp).toLocaleDateString('en-US', optionsDate)}</span>
+              <br />
+              <span className='title'>
+                {post.title}
+              </span>
+            </h5>
+            <h6 className='card-subtitle mb-2 text-muted text-capitalize'>{post.category}</h6>
+            <p className='card-text'>
+              <span className='oi oi-double-quote-serif-left'></span>
+              {post.body}
+              <span className='oi oi-double-quote-serif-right'></span>
+            </p>
+          </div>
+        </div>
+
         <div className='card'>
           <div className='card-body'>
             <form onSubmit={this.onSubmit}>
               <div className='col-md-4 form-group'>
+                <span className='text-capitalize'>add comment:</span><br />
                 <label htmlFor='author' className='text-capitalize'>author:</label>
                 <input
                   id='author'
@@ -175,11 +188,12 @@ class PostDetails extends Component {
           )
         })}
       </div>
-    )
+    ) : false
   }
 }
 
-const mapStateToProps = ({ comments }) => ({
+const mapStateToProps = ({ posts, comments }, props) => ({
+  post: posts ? posts.find(p => p.id === props.match.params.post_id) : undefined,
   comments,
 })
 
