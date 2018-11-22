@@ -23,12 +23,7 @@ export default function (state = STATE_INIT, action) {
         return post
       })
     case POST_BY_ID:
-      return state.map(post => {
-        if (post.id === action.post.id) {
-          return action.post
-        }
-        return post
-      })
+      return [action.post]
     case COMMENT_COUNT_ADD:
       return state.map(post => {
         if (post.id === action.post.id) {
