@@ -8,6 +8,8 @@ import {
   POST_BY_ID,
   VOTE_POST,
   DEL_POST,
+  COMMENT_COUNT_ADD,
+  COMMENT_COUNT_DEL,
   ALL_COMMENTS,
   EDIT_COMMENT,
   ADD_COMMENT,
@@ -48,6 +50,16 @@ const votePost = post => ({
 
 const delPost = post => ({
   type: DEL_POST,
+  post
+})
+
+const commentCountAdd = post => ({
+  type: COMMENT_COUNT_ADD,
+  post
+})
+
+const commentCountDel = post => ({
+  type: COMMENT_COUNT_DEL,
   post
 })
 
@@ -143,6 +155,14 @@ export const getVotePost = (id, vote) => {
     })
 }
 
+export const getCommentCountAdd = (post) => {
+  return dispatch => dispatch(commentCountAdd(post))
+}
+
+export const getCommentCountDel = (post, id) => {
+  return dispatch => dispatch(commentCountDel(post, id))
+}
+
 export const getComments = (idPost) => {
   return dispatch => api.getComments(idPost)
     .then(comment => dispatch(commentRequest(comment)))
@@ -172,7 +192,7 @@ export const getAddComment = (comment) => {
 
 export function getDelComment(idComment, idPost) {
   return dispatch => api.delComment(idComment)
-    .then(comment => dispatch(delComment(idPost)))
+    .then(idPost => dispatch(delComment(idPost)))
     .catch(err => {
       console.error(err)
       dispatch(throwError())

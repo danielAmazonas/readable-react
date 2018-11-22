@@ -27,7 +27,7 @@ class CommentEdit extends Component {
       parentId: this.state.parentId
     }
     this.props.editComment(commentTemp.id, commentTemp)
-    this.props.history.push(`/`)
+    this.props.history.push(`/${this.props.match.params.category}/${this.state.parentId}`)
   }
 
   onChange = (event) => {

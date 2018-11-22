@@ -1,7 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getComments, getAddComment, getDelComment, getVoteComment, getPostById } from '../actions'
+import { 
+  getComments,
+  getAddComment,
+  getDelComment,
+  getDelPost,
+  getVoteComment,
+  getVotePost,
+  getCommentCountAdd,
+  getCommentCountDel,
+  getPostById } from '../actions'
 import { Link } from 'react-router-dom'
+import PostVote from './PostVote'
 import CommentVote from './CommentVote'
 import If from '../utils/If'
 import Page404 from './Page404'
@@ -59,7 +69,16 @@ class PostDetails extends Component {
   }
 
   render() {
-    const { local, comments, delComment, voteComment, postById, post } = this.props
+    const {
+      local,
+      comments,
+      delComment,
+      voteComment,
+      post,
+      votePost,
+      delPost,
+      commentCountAdd,
+      commentCountDel } = this.props
     const { author, body } = this.state
 
     let category = this.props.match.params.category
@@ -97,6 +116,15 @@ class PostDetails extends Component {
               <span className='author'>{post.author}</span>
               <span> </span>
               <span className='date'>{post.timestamp = new Date(post.timestamp).toLocaleDateString('en-US', optionsDate)}</span>
+              <span className='text-capitalize float-right score row'>score:
+                    <PostVote voteScore={post.voteScore} />
+                <a onClick={e => votePost(post.id, 'downVote')} className='down'>
+                  <span className='oi oi-thumb-down'></span>
+                </a>
+                <a onClick={e => votePost(post.id, 'upVote')} className='up'>
+                  <span className='oi oi-thumb-up'></span>
+                </a>
+              </span>
               <br />
               <span className='title'>
                 {post.title}
@@ -108,6 +136,16 @@ class PostDetails extends Component {
               {post.body}
               <span className='oi oi-double-quote-serif-right'></span>
             </p>
+            <span className='oi oi-comment-square'></span>
+            {`Comments ${post.commentCount}`}
+            <Link to={`/post/edit/${post.id}`} className='card-link'>
+              <span className='oi oi-pencil'></span>
+              Edit
+                </Link>
+            <a href='/' onClick={e => delPost(post.id)} className='card-link'>
+              <span className='oi oi-trash'></span>
+              Delete
+                </a>
           </div>
         </div>
 
@@ -141,7 +179,7 @@ class PostDetails extends Component {
                   placeholder='Enter your comment'></textarea>
               </div>
               <div className='col'>
-                <button type='submit' className='btn btn-outline-dark btn-sm text-capitalize'>
+                <button type='submit' className='btn btn-outline-dark btn-sm text-capitalize' onClick={e => commentCountAdd(post)}>
                   <span className='oi oi-cloud-upload'></span>
                   save
                 </button>
@@ -177,7 +215,7 @@ class PostDetails extends Component {
                   <span className='oi oi-pencil'></span>
                   Edit
                 </Link>
-                <a href='/' onClick={e => delComment(m.id)} className='card-link'>
+                <a onClick={e => (delComment(m.id), commentCountDel(post, m.id))} className='card-link del-link'>
                   <span className='oi oi-trash'></span>
                   Delete</a>
               </div>
@@ -200,6 +238,10 @@ const mapDispatchToProps = dispatch => ({
   addComment: (post) => dispatch(getAddComment(post)),
   voteComment: (data, vote) => dispatch(getVoteComment(data, vote)),
   postById: (idPost) => dispatch(getPostById(idPost)),
+  votePost: (data, vote) => dispatch(getVotePost(data, vote)),
+  delPost: (id) => dispatch(getDelPost(id)),
+  commentCountAdd: (post) => dispatch(getCommentCountAdd(post)),
+  commentCountDel: (post, idComment) => dispatch(getCommentCountDel(post, idComment))
 })
 
 const PostDetailsContainer = connect(

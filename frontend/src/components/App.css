@@ -77,6 +77,15 @@ body {
   color: #007bff !important;
 }
 
+.del-link {
+  color: #007bff !important;
+  cursor: pointer;
+}
+
+.del-link:hover {
+  color: #007bff !important;
+}
+
 /* Background */
 #animate-area	{ 
 	width: 100%;

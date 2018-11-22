@@ -29,12 +29,7 @@ export default function (state = STATE_INIT, action) {
         return comment
       })
     case DEL_COMMENT:
-      return state.map(comment => {
-        if (comment.id === action.comment.id) {
-          return action.comment
-        }
-        return comment
-      })
+      return state.filter(comment => comment.id !== action.comment.id)
     default:
       return state
   }
